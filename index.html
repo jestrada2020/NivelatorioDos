@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramientas y visualción del nivelatorio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    <!-- MathJax para renderizar LaTeX (si lo necesitas para las definiciones) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <style>
+        body {
+            display: flex;
+            font-family: sans-serif;
+            height: 100vh;
+            margin: 0;
+        }
+        #sidebar {
+            width: 440px; /* Ancho ajustado para mejor visualización de los nombres */
+            background-color: #f8f9fa;
+            padding: 20px;
+            height: 100%;
+            overflow-y: auto;
+            border-right: 1px solid #dee2e6;
+        }
+        #sidebar h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        #sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #sidebar ul li button {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background-color: #28a745; /* Un color diferente para este conjunto de herramientas */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #sidebar ul li button:hover {
+            background-color: #218838;
+        }
+        #sidebar ul li button.active {
+            background-color: #1e7e34;
+            font-weight: bold;
+        }
+        #content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100%;
+        }
+        .tool-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .tool-container h3 {
+            margin-top: 0;
+            color: #28a745;
+        }
+        .ggb-element-container {
+            width: 100%;
+            max-width: 1100px; /* Ajustado al applet más ancho */
+            margin: 15px auto; /* Centrar y espaciar */
+        }
+        .definition {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-left: 5px solid #28a745;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <h2>Nivelatorio Dos</h2>
+        <ul>
+            <li><button onclick="app.loadTool('introduccion')">Introducción</button></li>
+            <li><button onclick="app.loadTool('sumasDecimales')">SUMA DE NUMERO CON DECIMALES</button></li>
+            <li><button onclick="app.loadTool('operacionesCombinadasDecimales')">OPERACIONES COMBINADAS CON DECIMALES</button></li>
+            <li><button onclick="app.loadTool('potenciacionPropiedades')">POTENCIACION Y SUS PROPIEDADES</button></li>
+            <li><button onclick="app.loadTool('manejoSignosPotenciacion')">MANEJO DE SIGNOS EN LA POTENCIACION</button></li>
+            <li><button onclick="app.loadTool('operacionesRadicales')">OPERACIONES CON RADICALES</button></li>
+            <li><button onclick="app.loadTool('potenciasRadicalesFracciones')">POTENCIAS Y RADICALES CON FRACCIONES</button></li>
+            <li><button onclick="app.loadTool('lenguajeAlgebraico')">EL LENGUAJE ALGEBRAICO</button></li>
+            <li><button onclick="app.loadTool('operacionesMonomioPoli')">OPERACIONES CON MONOMIO Y POLINOMIOS</button></li>
+            <li><button onclick="app.loadTool('divisionPolinomios')">DIVISION DE POLINOMIOS</button></li>
+            
+        </ul>
+    </div>
+
+    <div id="content">
+        <div id="tool-content" class="tool-container">
+            <!-- El contenido de la herramienta se cargará aquí -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const toolContents = {
+            'introduccion': {
+                html: `<h3>Introducción a la Caja de Herramientas</h3>
+                    <p>Sabemos que algunos estudiantes llegan con deficiencias a la Universidad, deficiencias que afectan notablemente su rendimiento, así que estos estudiantes deben superar los temas que debieron aprender hace algunos años y aprender nuevamente los conceptos aritmeticos y algebraicos propios de su programa, sin los primeros bien afianzados no se aprenderán los  segundos.</p>
+                    <p>Por eso se ve la necesidad de nivelar a aquellos estudiantes que ingresan con deficiencias, para nivelarlos se ha creado un curso que además de darlo en forma tradicional, pero con un mejor acompañamiento por parte del profesor, se complementan con las actividades en línea que verán a continuación, la idea es brindarles herramientas necesarias para fortalecer sus bases y avanzar con seguridad en el proceso de aprendizaje.</p>
+                    <p>En el desarrollo de las actividades en línea el estudiante no podrá usar calculadora y así podrá desarrollar habilidades de razonamiento lógico, de agilidad mental y comprenderá mejor los conceptos matemáticos.</p>`,
+                scriptContent: null // No necesita script de GeoGebra
+            },
+            'sumasDecimales': {
+                html: `<h3>SUMA DE NUMERO CON DECIMALES</h3>
+                    <p><strong>AUTOR:</strong> Javier Cayetano Rodríguez</p>
+                    <p class="definition">
+                        <strong>Suma de Números con Decimales:</strong> La suma de números decimales es una operación aritmética fundamental que requiere alinear correctamente los números por su valor posicional, incluyendo la posición de la coma decimal. Es esencial que las comas decimales estén alineadas verticalmente para realizar la operación correctamente. Esta habilidad es crucial para trabajar con medidas, dinero y cálculos precisos en la vida cotidiana.
+                    </p>
+                    <div id="ggb-elementSumasDecimales" class="ggb-element-container" style="height:600px; max-width:1000px;"></div>`,
+                scriptContent: `
+                    if (typeof ggbAppSumasDecimales !== 'undefined' && ggbAppSumasDecimales.remove) { ggbAppSumasDecimales.remove(); }
+                    var ggbAppSumasDecimales = new GGBApplet({
+                        "material_id":"zbkwyuz5", "width": 1000, "height": 600, 
+                        "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false, "appName": "classic"
+                    }, true);
+                    ggbAppSumasDecimales.inject('ggb-elementSumasDecimales');`
+            },
+            'operacionesCombinadasDecimales': {
+                html: `<h3>OPERACIONES COMBINADAS CON DECIMALES</h3>
+                    <p><strong>AUTOR:</strong> Javier Cayetano Rodríguez</p>
+                    <p class="definition">
+                        <strong>Operaciones Combinadas con Decimales:</strong> Son expresiones matemáticas que incluyen múltiples operaciones aritméticas (suma, resta, multiplicación, división, potenciación) con números decimales que deben resolverse siguiendo un orden específico de precedencia: primero paréntesis, luego potencias, después multiplicaciones y divisiones (de izquierda a derecha), y finalmente sumas y restas (de izquierda a derecha). Es fundamental mantener la alineación correcta de las comas decimales y aplicar las reglas de redondeo cuando sea necesario.
+                    </p>
+                    <div id="ggb-elementOperacionesCombinadasDecimales" class="ggb-element-container" style="height:600px; max-width:1000px;"></div>`,
+                scriptContent: `
+                    if (typeof ggbAppOperacionesCombinadasDecimales !== 'undefined' && ggbAppOperacionesCombinadasDecimales.remove) { ggbAppOperacionesCombinadasDecimales.remove(); }
+                    var ggbAppOperacionesCombinadasDecimales = new GGBApplet({
+                        "material_id":"rrdbsu8d", "width": 1000, "height": 600, 
+                        "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false, "appName": "classic"
+                    }, true);
+                    ggbAppOperacionesCombinadasDecimales.inject('ggb-elementOperacionesCombinadasDecimales');`
+            },
+            'potenciacionPropiedades': {
+                html: `<h3>POTENCIACION Y SUS PROPIEDADES</h3>
+                    <p><strong>AUTOR:</strong> Javier Cayetano Rodríguez</p>
+                    <p class="definition">
+                        <strong>Potenciación y sus Propiedades:</strong> La potenciación es una operación matemática que consiste en multiplicar un número (base) por sí mismo tantas veces como indique el exponente. Las propiedades fundamentales incluyen: producto de potencias de igual base (se suman los exponentes), cociente de potencias de igual base (se restan los exponentes), potencia de una potencia (se multiplican los exponentes), potencia de un producto, y potencia de un cociente. Estas propiedades son esenciales para simplificar expresiones algebraicas y resolver ecuaciones.
+                    </p>
+                    <div id="ggb-elementPotenciacionPropiedades" class="ggb-element-container" style="height:600px; max-width:1000px;"></div>`,
+                scriptContent: `
+                    if (typeof ggbAppPotenciacionPropiedades !== 'undefined' && ggbAppPotenciacionPropiedades.remove) { ggbAppPotenciacionPropiedades.remove(); }
+                    var ggbAppPotenciacionPropiedades = new GGBApplet({
+                        "material_id":"fqvut6vd", "width": 1000, "height": 600, 
+                        "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false, "appName": "classic"
+                    }, true);
+                    ggbAppPotenciacionPropiedades.inject('ggb-elementPotenciacionPropiedades');`
+            },
+            'manejoSignosPotenciacion': {
+                html: `<h3>MANEJO DE SIGNOS EN LA POTENCIACION</h3>
+                    <p><strong>AUTOR:</strong> Javier Cayetano Rodríguez</p>
+                    <p class="definition">
+                        <strong>Manejo de Signos en la Potenciación:</strong> El manejo correcto de los signos en la potenciación es fundamental para obtener resultados precisos. Las reglas principales son: cuando la base es positiva, el resultado siempre es positivo; cuando la base es negativa y el exponente es par, el resultado es positivo; cuando la base es negativa y el exponente es impar, el resultado es negativo. Es importante distinguir entre (-a)ⁿ y -aⁿ, ya que el primer caso indica que el signo negativo está incluido en la base, mientras que el segundo indica que se aplica el signo negativo al resultado de la potenciación.
+                    </p>
+                    <div id="ggb-elementManejoSignosPotenciacion" class="ggb-element-container" style="height:600px; max-width:1000px;"></div>`,
+                scriptContent: `
+                    if (typeof ggbAppManejoSignosPotenciacion !== 'undefined' && ggbAppManejoSignosPotenciacion.remove) { ggbAppManejoSignosPotenciacion.remove(); }
+                    var ggbAppManejoSignosPotenciacion = new GGBApplet({
+                        "material_id":"ydeykdwy", "width": 1000, "height": 600, 
+                        "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false, "appName": "classic"
+                    }, true);
+                    ggbAppManejoSignosPotenciacion.inject('ggb-elementManejoSignosPotenciacion');`
+            },
+            'operacionesRadicales': {
+                html: `<h3>OPERACIONES CON RADICALES</h3>
+                    <p><strong>AUTOR:</strong> Javier Cayetano Rodríguez</p>
+                    <p class="definition">
+                        <strong>Operaciones con Radicales:</strong> Los radicales o raíces son operaciones inversas a la potenciación. Las operaciones básicas con radicales incluyen la suma y resta (solo se pueden realizar entre radicales semejantes), la multiplicación y división de radicales, la racionalización de denominadores, y la simplificación de expresiones radicales. Es fundamental conocer las propiedades de los radicales: √(a·b) = √a · √b, √(a/b) = √a / √b, y las reglas para trabajar con índices diferentes. Estas operaciones son esenciales en álgebra y cálculo.
+                    </p>
+                    <div id="ggb-elementOperacionesRadicales" class="ggb-element-container" style="height:600px; max-width:1000px;"></div>`,
+                scriptContent: `
+                    if (typeof ggbAppOperacionesRadicales !== 'undefined' && ggbAppOperacionesRadicales.remove) { ggbAppOperacionesRadicales.remove(); }
+                    var ggbAppOperacionesRadicales = new GGBApplet({
+                        "material_id":"k8sadngq", "width": 1000, "height": 600, 
+                        "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false, "appName": "classic"
+                    }, true);
+                    ggbAppOperacionesRadicales.inject('ggb-elementOperacionesRadicales');`
+            },
+            'potenciasRadicalesFracciones': {
+                html: `<h3>POTENCIAS Y RADICALES CON FRACCIONES</h3>
+                    <p><strong>AUTOR:</strong> Javier Cayetano Rodríguez</p>
+                    <p class="definition">
+                        <strong>Potencias y Radicales con Fracciones:</strong> Son operaciones que combinan fracciones con potencias y radicales. Para las potencias de fracciones se aplica la regla (a/b)ⁿ = aⁿ/bⁿ. Los radicales de fracciones se pueden expresar como √(a/b) = √a/√b. Es importante dominar la racionalización de denominadores cuando aparecen radicales en el denominador, y saber simplificar expresiones que involucran exponentes fraccionarios, ya que √ⁿa = a^(1/n). Estas operaciones son fundamentales para trabajar con expresiones algebraicas más complejas y resolver ecuaciones que involucran potencias y radicales.
+                    </p>
+                    <div id="ggb-elementPotenciasRadicalesFracciones" class="ggb-element-container" style="height:600px; max-width:1000px;"></div>`,
+                scriptContent: `
+                    if (typeof ggbAppPotenciasRadicalesFracciones !== 'undefined' && ggbAppPotenciasRadicalesFracciones.remove) { ggbAppPotenciasRadicalesFracciones.remove(); }
+                    var ggbAppPotenciasRadicalesFracciones = new GGBApplet({
+                        "material_id":"hkf8dshn", "width": 1000, "height": 600, 
+                        "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false, "appName": "classic"
+                    }, true);
+                    ggbAppPotenciasRadicalesFracciones.inject('ggb-elementPotenciasRadicalesFracciones');`
+            },
+            'lenguajeAlgebraico': {
+                html: `<h3>EL LENGUAJE ALGEBRAICO</h3>
+                    <p><strong>AUTOR:</strong> Javier Cayetano Rodríguez</p>
+                    <p class="definition">
+                        <strong>El Lenguaje Algebraico:</strong> Es la forma de expresar matemáticamente situaciones, relaciones y patrones utilizando símbolos, letras (variables) y números. Permite traducir expresiones del lenguaje común al lenguaje matemático y viceversa. Las variables representan cantidades desconocidas o que pueden cambiar, mientras que los coeficientes son números que multiplican a las variables. Este lenguaje es fundamental para resolver problemas, formular ecuaciones y expresar relaciones generales en matemáticas. Incluye conceptos como términos, expresiones algebraicas, monomios, binomios y polinomios.
+                    </p>
+                    <div id="ggb-elementLenguajeAlgebraico" class="ggb-element-container" style="height:600px; max-width:1000px;"></div>`,
+                scriptContent: `
+                    if (typeof ggbAppLenguajeAlgebraico !== 'undefined' && ggbAppLenguajeAlgebraico.remove) { ggbAppLenguajeAlgebraico.remove(); }
+                    var ggbAppLenguajeAlgebraico = new GGBApplet({
+                        "material_id":"gyrbr8hj", "width": 1000, "height": 600, 
+                        "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false, "appName": "classic"
+                    }, true);
+                    ggbAppLenguajeAlgebraico.inject('ggb-elementLenguajeAlgebraico');`
+            },
+            'operacionesMonomioPoli': {
+                html: `<h3>OPERACIONES CON MONOMIO Y POLINOMIOS</h3>
+                    <p><strong>AUTOR:</strong> Javier Cayetano Rodríguez</p>
+                    <p class="definition">
+                        <strong>Operaciones con Monomios y Polinomios:</strong> Los monomios son expresiones algebraicas formadas por un coeficiente y variables con exponentes enteros no negativos. Los polinomios son la suma de varios monomios. Las operaciones básicas incluyen: suma y resta (se combinan términos semejantes), multiplicación (se aplica la propiedad distributiva y se suman exponentes de la misma base), división (cociente y residuo), y operaciones especiales como productos notables (cuadrado de un binomio, diferencia de cuadrados, etc.). Estas operaciones son fundamentales en álgebra y necesarias para la factorización y resolución de ecuaciones.
+                    </p>
+                    <div id="ggb-elementOperacionesMonomioPoli" class="ggb-element-container" style="height:600px; max-width:1000px;"></div>`,
+                scriptContent: `
+                    if (typeof ggbAppOperacionesMonomioPoli !== 'undefined' && ggbAppOperacionesMonomioPoli.remove) { ggbAppOperacionesMonomioPoli.remove(); }
+                    var ggbAppOperacionesMonomioPoli = new GGBApplet({
+                        "material_id":"judb2ukz", "width": 1000, "height": 600, 
+                        "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false, "appName": "classic"
+                    }, true);
+                    ggbAppOperacionesMonomioPoli.inject('ggb-elementOperacionesMonomioPoli');`
+            },
+            'divisionPolinomios': {
+                html: `<h3>DIVISION DE POLINOMIOS</h3>
+                    <p><strong>AUTOR:</strong> Javier Cayetano Rodríguez</p>
+                    <p class="definition">
+                        <strong>División de Polinomios:</strong> Es una operación algebraica que permite dividir un polinomio (dividendo) entre otro polinomio (divisor) para obtener un cociente y un residuo. Existen varios métodos para realizar esta operación: división larga o sintética, y el método de Ruffini (cuando el divisor es de la forma x - a). La relación fundamental es: Dividendo = Divisor × Cociente + Residuo. Esta operación es esencial para la factorización de polinomios, encontrar raíces, y simplificar expresiones algebraicas racionales. El grado del residuo siempre debe ser menor que el grado del divisor.
+                    </p>
+                    <div id="ggb-elementDivisionPolinomios" class="ggb-element-container" style="height:600px; max-width:1000px;"></div>`,
+                scriptContent: `
+                    if (typeof ggbAppDivisionPolinomios !== 'undefined' && ggbAppDivisionPolinomios.remove) { ggbAppDivisionPolinomios.remove(); }
+                    var ggbAppDivisionPolinomios = new GGBApplet({
+                        "material_id":"tcmwbrcj", "width": 1000, "height": 600, 
+                        "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false, "appName": "classic"
+                    }, true);
+                    ggbAppDivisionPolinomios.inject('ggb-elementDivisionPolinomios');`
+            },
+            
+        };
+
+        const app = {
+            activeButton: null,
+            currentGgbScript: null,
+
+            loadTool: function(toolKey) {
+                const contentDiv = document.getElementById('tool-content');
+                const toolData = toolContents[toolKey];
+
+                if (!toolData) {
+                    contentDiv.innerHTML = '<h3>Error</h3><p>Herramienta no encontrada.</p>';
+                    return;
+                }
+
+                contentDiv.innerHTML = toolData.html; // Carga el HTML primero
+
+                // Asegurar que MathJax procese el nuevo contenido si hay fórmulas LaTeX
+                if (typeof MathJax !== "undefined") {
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, contentDiv]);
+                }
+
+                if (toolData.scriptContent) {
+                    if (this.currentGgbScript && this.currentGgbScript.parentNode) {
+                        this.currentGgbScript.parentNode.removeChild(this.currentGgbScript);
+                    }
+                    
+                    const scriptEl = document.createElement('script');
+                    scriptEl.type = 'text/javascript';
+                    // Pequeño retraso para asegurar que el DOM esté listo para GeoGebra,
+                    // especialmente si el applet es grande o la máquina es lenta.
+                    scriptEl.textContent = `setTimeout(function() { ${toolData.scriptContent} }, 50);`;
+                    contentDiv.appendChild(scriptEl); 
+                    this.currentGgbScript = scriptEl;
+                } else {
+                     if (this.currentGgbScript && this.currentGgbScript.parentNode) {
+                        this.currentGgbScript.parentNode.removeChild(this.currentGgbScript);
+                        this.currentGgbScript = null;
+                    }
+                }
+
+                if (this.activeButton) {
+                    this.activeButton.classList.remove('active');
+                }
+                const buttons = document.querySelectorAll('#sidebar ul li button');
+                buttons.forEach(button => {
+                    if (button.getAttribute('onclick') === `app.loadTool('${toolKey}')`) {
+                        button.classList.add('active');
+                        this.activeButton = button;
+                    }
+                });
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstButton = document.querySelector('#sidebar ul li button');
+            if (firstButton) {
+                const initialToolKey = firstButton.getAttribute('onclick').match(/app.loadTool\('([^']+)'\)/)[1];
+                app.loadTool(initialToolKey);
+            }
+        });
+    </script>
+    <!-- Si tienes un chatbot, puedes añadir su script aquí también -->
+</body>
+</html>
